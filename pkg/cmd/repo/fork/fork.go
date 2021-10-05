@@ -93,6 +93,10 @@ Additional 'git clone' flags can be passed in by listing them after '--'.`,
 				opts.Rename = true // Any existing 'origin' will be renamed to upstream
 			}
 
+			if opts.Repository != "" && cmd.Flags().Changed("remote") {
+				return &cmdutil.FlagError{Err: errors.New("cannot use `--remote` when specifying the repository")}
+			}
+
 			if promptOk {
 				// We can prompt for these if they were not specified.
 				opts.PromptClone = !cmd.Flags().Changed("clone")

@@ -127,6 +127,12 @@ func TestNewCmdFork(t *testing.T) {
 			errMsg:  "--org cannot be blank",
 		},
 		{
+			name:    "remote with specified repo",
+			cli:     "foo/bar --remote",
+			wantErr: true,
+			errMsg:  "cannot use `--remote` when specifying the repository",
+		},
+		{
 			name:    "git flags in wrong place",
 			cli:     "--depth 1 OWNER/REPO",
 			wantErr: true,
